@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 15.625" name="tiresiasDBcontext">
+  <DataContextMoniker Name="/tiresiasDBcontextDataContext" />
+  <nestedChildShapes>
+    <classShape Id="1bb5a68f-5840-4f19-a744-33d17c3f6d77" absoluteBounds="3.5, 8.5, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/tiresiasDBcontextDataContext/author" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5cb9e00b-b65d-47df-92d1-68423f24adc1" absoluteBounds="3.515, 8.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="312a788e-c66c-429d-a1f8-590b6554a0e9" absoluteBounds="3.5, 6.625, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/tiresiasDBcontextDataContext/language" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2e55fc5e-b6f8-484f-a86e-29d98b4a47ef" absoluteBounds="3.515, 7.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="95bd2ac1-0528-4cd5-b340-9729d90ac2ed" absoluteBounds="3.5, 10.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/tiresiasDBcontextDataContext/metadata" />
+      <nestedChildShapes>
+        <elementListCompartment Id="80a38fa9-f85f-4669-8624-b2c1de504e5e" absoluteBounds="3.515, 11.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3d4fffa6-5995-47c5-a9e4-e0686785e8a4" absoluteBounds="0.75, 4, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/tiresiasDBcontextDataContext/organization" />
+      <nestedChildShapes>
+        <elementListCompartment Id="361a54b6-83d8-4a81-8b45-b8abc88fd9e3" absoluteBounds="0.765, 4.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="82c69e70-862e-4f67-bced-46ebb7a16f88" absoluteBounds="6.75, 6.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/tiresiasDBcontextDataContext/post" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1807b6a7-15b0-4895-bef3-7a13f0926ec2" absoluteBounds="6.765, 7.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f629318a-76f4-4c18-9070-f05ed130f3c2" absoluteBounds="0.75, 1.625, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/tiresiasDBcontextDataContext/role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="96d0b75a-291c-484b-b373-dd630d069c19" absoluteBounds="0.765, 2.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4ef1a65b-c114-4f1a-8ace-21013e2f7643" absoluteBounds="3.5, 13, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/tiresiasDBcontextDataContext/submission" />
+      <nestedChildShapes>
+        <elementListCompartment Id="14c33bbe-496b-44dd-8056-9cf4df8fd243" absoluteBounds="3.515, 13.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="dfec9f00-6439-4e1e-8ba8-5c6c52395332" absoluteBounds="3.5, 4, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/tiresiasDBcontextDataContext/translator" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9c229dc4-b7cb-4bdc-8f1b-de50509710d0" absoluteBounds="3.515, 4.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="23357d14-0872-4086-a81c-8ce93a0e8856" absoluteBounds="3.5, 0.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/tiresiasDBcontextDataContext/user" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4949bc09-7f23-4849-a806-126eef3b637e" absoluteBounds="3.515, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7ed75e42-51ec-4ab1-8e9f-245ad86105fc" absoluteBounds="6.25, 3.375, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/tiresiasDBcontextDataContext/work" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d71c4727-c1e6-4a60-bda2-67a4f20bec8b" absoluteBounds="6.265, 3.835, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 4.69314697265625); (3.5 : 4.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/tiresiasDBcontextDataContext/organization/organization_translator" />
+      <nodes>
+        <classShapeMoniker Id="3d4fffa6-5995-47c5-a9e4-e0686785e8a4" />
+        <classShapeMoniker Id="dfec9f00-6439-4e1e-8ba8-5c6c52395332" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 2.07294840494792); (3.04166666666667 : 2.07294840494792 : JumpStart); (3.20833333333333 : 2.07294840494792 : JumpEnd); (3.5 : 2.07294840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/tiresiasDBcontextDataContext/role/role_user" />
+      <nodes>
+        <classShapeMoniker Id="f629318a-76f4-4c18-9070-f05ed130f3c2" />
+        <classShapeMoniker Id="23357d14-0872-4086-a81c-8ce93a0e8856" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4); (3.125 : 3.625); (3.125 : 1.38022220247396); (3.5 : 1.38022220247396)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/tiresiasDBcontextDataContext/organization/organization_user" />
+      <nodes>
+        <classShapeMoniker Id="3d4fffa6-5995-47c5-a9e4-e0686785e8a4" />
+        <classShapeMoniker Id="23357d14-0872-4086-a81c-8ce93a0e8856" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 9.23484537760417); (6.21353666666667 : 9.23484537760417 : JumpStart); (6.38020333333333 : 9.23484537760417 : JumpEnd); (6.46875 : 9.23484537760417); (6.46875 : 5.9151025390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/tiresiasDBcontextDataContext/author/author_work" />
+      <nodes>
+        <classShapeMoniker Id="1bb5a68f-5840-4f19-a744-33d17c3f6d77" />
+        <classShapeMoniker Id="7ed75e42-51ec-4ab1-8e9f-245ad86105fc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 1.63544840494792); (7.25 : 1.63544840494792); (7.25 : 3.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/tiresiasDBcontextDataContext/user/user_work" />
+      <nodes>
+        <classShapeMoniker Id="23357d14-0872-4086-a81c-8ce93a0e8856" />
+        <classShapeMoniker Id="7ed75e42-51ec-4ab1-8e9f-245ad86105fc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 6.65625); (6.3281225 : 6.65625); (6.3281225 : 5.9151025390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/tiresiasDBcontextDataContext/language/language_work" />
+      <nodes>
+        <classShapeMoniker Id="312a788e-c66c-429d-a1f8-590b6554a0e9" />
+        <classShapeMoniker Id="7ed75e42-51ec-4ab1-8e9f-245ad86105fc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 11.4142976888021); (6.21353666666667 : 11.4142976888021 : JumpStart); (6.38020333333333 : 11.4142976888021 : JumpEnd); (6.6093775 : 11.4142976888021); (6.6093775 : 5.9151025390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/tiresiasDBcontextDataContext/metadata/metadata_work" />
+      <nodes>
+        <classShapeMoniker Id="95bd2ac1-0528-4cd5-b340-9729d90ac2ed" />
+        <classShapeMoniker Id="7ed75e42-51ec-4ab1-8e9f-245ad86105fc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 14.1739005533854); (6.29687 : 14.1739005533854); (6.29687 : 5.9151025390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/tiresiasDBcontextDataContext/submission/submission_work" />
+      <nodes>
+        <classShapeMoniker Id="4ef1a65b-c114-4f1a-8ace-21013e2f7643" />
+        <classShapeMoniker Id="7ed75e42-51ec-4ab1-8e9f-245ad86105fc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.69314697265625); (6.25 : 4.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/tiresiasDBcontextDataContext/translator/translator_work" />
+      <nodes>
+        <classShapeMoniker Id="dfec9f00-6439-4e1e-8ba8-5c6c52395332" />
+        <classShapeMoniker Id="7ed75e42-51ec-4ab1-8e9f-245ad86105fc" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

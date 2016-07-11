@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="tiresiasdb" Class="tiresiasDBcontextDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=tiresias.database.windows.net;Initial Catalog=tiresiasdb;User ID=foremaro;Encrypt=True;TrustServerCertificate=False" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="tiresiasdbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="tiresiasdb.authors" Member="authors">
+    <Type Name="author">
+      <Column Name="author_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="last_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="author_work" Member="works" ThisKey="author_id" OtherKey="author_id" Type="work" />
+    </Type>
+  </Table>
+  <Table Name="tiresiasdb.languages" Member="languages">
+    <Type Name="language">
+      <Column Name="language_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="lang_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="language_work" Member="works" ThisKey="language_id" OtherKey="lang_id" Type="work" />
+    </Type>
+  </Table>
+  <Table Name="tiresiasdb.metadata" Member="metadatas">
+    <Type Name="metadata">
+      <Column Name="metadata_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="media_type" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="doi" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="isbn" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Association Name="metadata_work" Member="works" ThisKey="metadata_id" OtherKey="metadata_id" Type="work" />
+    </Type>
+  </Table>
+  <Table Name="tiresiasdb.organizations" Member="organizations">
+    <Type Name="organization">
+      <Column Name="organization_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="orginization_name" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="orginization_abrev" Type="System.String" DbType="NVarChar(6) NOT NULL" CanBeNull="false" />
+      <Association Name="organization_translator" Member="translators" ThisKey="organization_id" OtherKey="organization_id" Type="translator" />
+      <Association Name="organization_user" Member="users" ThisKey="organization_id" OtherKey="organization_id" Type="user" />
+    </Type>
+  </Table>
+  <Table Name="tiresiasdb.posts" Member="posts">
+    <Type Name="post">
+      <Column Name="post_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="post_type" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="post_title" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="post_date" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="post_content" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="tiresiasdb.roles" Member="roles">
+    <Type Name="role">
+      <Column Name="role_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="role_name" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+      <Association Name="role_user" Member="users" ThisKey="role_id" OtherKey="role_id" Type="user" />
+    </Type>
+  </Table>
+  <Table Name="tiresiasdb.submissions" Member="submissions">
+    <Type Name="submission">
+      <Column Name="submission_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="submission_date" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="submission_email" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="work_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="submission_content" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="editor_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="submissionscol" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="approved" Type="System.Data.Linq.Binary" DbType="Binary(1) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="submission_work" Member="works" ThisKey="submission_id" OtherKey="submission_id" Type="work" />
+    </Type>
+  </Table>
+  <Table Name="tiresiasdb.translators" Member="translators">
+    <Type Name="translator">
+      <Column Name="translator_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="translator_name" Type="System.String" DbType="NVarChar(55) NOT NULL" CanBeNull="false" />
+      <Column Name="organization_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="translator_work" Member="works" ThisKey="translator_id" OtherKey="translator_id" Type="work" />
+      <Association Name="organization_translator" Member="organization" ThisKey="organization_id" OtherKey="organization_id" Type="organization" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="tiresiasdb.users" Member="users">
+    <Type Name="user">
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="organization_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="role_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="user_work" Member="works" ThisKey="user_id" OtherKey="user_entry_id" Type="work" />
+      <Association Name="role_user" Member="role" ThisKey="role_id" OtherKey="role_id" Type="role" IsForeignKey="true" />
+      <Association Name="organization_user" Member="organization" ThisKey="organization_id" OtherKey="organization_id" Type="organization" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="tiresiasdb.works" Member="works">
+    <Type Name="work">
+      <Column Name="work_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="edition" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="author_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="lang_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="translator_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="submission_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="user_entry_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="metadata_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="author_work" Member="author" ThisKey="author_id" OtherKey="author_id" Type="author" IsForeignKey="true" />
+      <Association Name="user_work" Member="user" ThisKey="user_entry_id" OtherKey="user_id" Type="user" IsForeignKey="true" />
+      <Association Name="language_work" Member="language" ThisKey="lang_id" OtherKey="language_id" Type="language" IsForeignKey="true" />
+      <Association Name="metadata_work" Member="metadata" ThisKey="metadata_id" OtherKey="metadata_id" Type="metadata" IsForeignKey="true" />
+      <Association Name="submission_work" Member="submission" ThisKey="submission_id" OtherKey="submission_id" Type="submission" IsForeignKey="true" />
+      <Association Name="translator_work" Member="translator" ThisKey="translator_id" OtherKey="translator_id" Type="translator" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

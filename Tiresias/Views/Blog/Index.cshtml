@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Tiresias.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.post_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.post_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.post_title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.post_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.post_content)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.post_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.post_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.post_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.post_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.post_content)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.post_id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.post_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.post_id })
+        </td>
+    </tr>
+}
+
+</table>
