@@ -1,0 +1,45 @@
+﻿@model Tiresias.Models.Post
+
+<article>
+    <div>
+        <h1>@Html.DisplayFor(model => model.post_title)</h1>
+        <span class="meta">Posted @Html.DisplayFor(model => model.post_date)</span>
+        <hr />
+        <dl class="dl-horizontal">
+            <dd>
+                @Html.HiddenFor(model => model.post_id)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.post_type)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.post_type)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.post_date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.post_date)
+            </dd>
+        </dl>
+        <span class="intro-header post-heading meta">Posted @Html.DisplayFor(model => model.post_date)</span>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                @Html.DisplayFor(model => model.post_content)
+                </div>
+            </div>
+        </div>
+
+</article>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

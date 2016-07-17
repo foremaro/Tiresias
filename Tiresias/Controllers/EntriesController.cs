@@ -8,53 +8,41 @@ using Tiresias.DAL;
 
 namespace Tiresias.Controllers
 {
-    public class BlogController : Controller
+    public class EntriesController : Controller
     {
         public tiresiasDBcontextDataContext dbContext = new tiresiasDBcontextDataContext();
 
-
-        // GET: Blog
+        // GET: Entries
         public ActionResult Index()
         {
-
-            var myBlogs = from p in dbContext.posts
-                          select new Post
+            var myEntries = from s in dbContext.submissions
+                          select new Submission
                           {
-                              post_id = p.post_id,
-                              post_title = p.post_title,
-                              post_type = p.post_type,
-                              post_date = p.post_date,
-                              post_content = p.post_content
+                              submission_id  = s.submission_id,
+                              submission_date = s.submission_date,
+                              submission_content = s.submission_content,
+                              submission_email = s.submission_email,
+                              work_id = s.work_id,
+                              approved = s.approved,
+                              editor_id = s.editor_id
                           };
 
-            return View(myBlogs);
+            return View(myEntries);
         }
 
-        // GET: Blog/Details/5
-        public ActionResult Article(int id)
+        // GET: Entries/Details/5
+        public ActionResult Details(int id)
         {
-            var myArticle = dbContext.posts
-                .Where(c => c.post_id == id)
-                .Select(p=> new Post
-                {
-                    post_id = p.post_id,
-                    post_title = p.post_title,
-                    post_type = p.post_type,
-                    post_date = p.post_date,
-                    post_content = p.post_content
-                })
-                .SingleOrDefault();
-
-            return View(myArticle);
+            return View();
         }
 
-        // GET: Blog/Create
+        // GET: Entries/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Blog/Create
+        // POST: Entries/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -70,13 +58,13 @@ namespace Tiresias.Controllers
             }
         }
 
-        // GET: Blog/Edit/5
+        // GET: Entries/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Blog/Edit/5
+        // POST: Entries/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -92,13 +80,13 @@ namespace Tiresias.Controllers
             }
         }
 
-        // GET: Blog/Delete/5
+        // GET: Entries/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Blog/Delete/5
+        // POST: Entries/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

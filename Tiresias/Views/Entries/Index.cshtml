@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Tiresias.Models.Submission>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-responsive col-lg-12">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.submission_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.submission_email)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.submission_content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.editor_id)
+        </th>
+        <th>
+            hide this column if not admin
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+            @Html.HiddenFor(modelItem => item.submission_id)
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.submission_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.submission_email)
+        </td>
+        
+            @Html.HiddenFor(modelItem => item.work_id)
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.submission_content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.editor_id)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
