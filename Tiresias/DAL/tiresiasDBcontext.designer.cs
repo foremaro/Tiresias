@@ -22,7 +22,7 @@ namespace Tiresias.DAL
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="tiresiasdb")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="tiresiasdb01")]
 	public partial class tiresiasDBcontextDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -173,7 +173,7 @@ namespace Tiresias.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="tiresiasdb.authors")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.authors")]
 	public partial class author : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -205,7 +205,7 @@ namespace Tiresias.DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_author_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_author_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int author_id
 		{
 			get
@@ -311,7 +311,7 @@ namespace Tiresias.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="tiresiasdb.languages")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.languages")]
 	public partial class language : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -319,7 +319,7 @@ namespace Tiresias.DAL
 		
 		private int _language_id;
 		
-		private string _lang_name;
+		private string _language_name;
 		
 		private EntitySet<work> _works;
 		
@@ -329,8 +329,8 @@ namespace Tiresias.DAL
     partial void OnCreated();
     partial void Onlanguage_idChanging(int value);
     partial void Onlanguage_idChanged();
-    partial void Onlang_nameChanging(string value);
-    partial void Onlang_nameChanged();
+    partial void Onlanguage_nameChanging(string value);
+    partial void Onlanguage_nameChanged();
     #endregion
 		
 		public language()
@@ -339,7 +339,7 @@ namespace Tiresias.DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_language_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_language_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int language_id
 		{
 			get
@@ -359,27 +359,27 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lang_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string lang_name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_language_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string language_name
 		{
 			get
 			{
-				return this._lang_name;
+				return this._language_name;
 			}
 			set
 			{
-				if ((this._lang_name != value))
+				if ((this._language_name != value))
 				{
-					this.Onlang_nameChanging(value);
+					this.Onlanguage_nameChanging(value);
 					this.SendPropertyChanging();
-					this._lang_name = value;
-					this.SendPropertyChanged("lang_name");
-					this.Onlang_nameChanged();
+					this._language_name = value;
+					this.SendPropertyChanged("language_name");
+					this.Onlanguage_nameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="language_work", Storage="_works", ThisKey="language_id", OtherKey="lang_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="language_work", Storage="_works", ThisKey="language_id", OtherKey="language_id")]
 		public EntitySet<work> works
 		{
 			get
@@ -425,7 +425,7 @@ namespace Tiresias.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="tiresiasdb.metadata")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.metadata")]
 	public partial class metadata : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -438,8 +438,6 @@ namespace Tiresias.DAL
 		private string _doi;
 		
 		private string _isbn;
-		
-		private EntitySet<work> _works;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -457,11 +455,10 @@ namespace Tiresias.DAL
 		
 		public metadata()
 		{
-			this._works = new EntitySet<work>(new Action<work>(this.attach_works), new Action<work>(this.detach_works));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_metadata_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_metadata_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int metadata_id
 		{
 			get
@@ -481,7 +478,7 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_media_type", DbType="NVarChar(45) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_media_type", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string media_type
 		{
 			get
@@ -501,7 +498,7 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_doi", DbType="NVarChar(45)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_doi", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string doi
 		{
 			get
@@ -521,7 +518,7 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isbn", DbType="NVarChar(45)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isbn", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string isbn
 		{
 			get
@@ -538,19 +535,6 @@ namespace Tiresias.DAL
 					this.SendPropertyChanged("isbn");
 					this.OnisbnChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="metadata_work", Storage="_works", ThisKey="metadata_id", OtherKey="metadata_id")]
-		public EntitySet<work> works
-		{
-			get
-			{
-				return this._works;
-			}
-			set
-			{
-				this._works.Assign(value);
 			}
 		}
 		
@@ -573,21 +557,9 @@ namespace Tiresias.DAL
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-		
-		private void attach_works(work entity)
-		{
-			this.SendPropertyChanging();
-			entity.metadata = this;
-		}
-		
-		private void detach_works(work entity)
-		{
-			this.SendPropertyChanging();
-			entity.metadata = null;
-		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="tiresiasdb.organizations")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.organizations")]
 	public partial class organization : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -622,7 +594,7 @@ namespace Tiresias.DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_organization_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_organization_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int organization_id
 		{
 			get
@@ -642,7 +614,7 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_orginization_name", DbType="NVarChar(45) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_orginization_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string orginization_name
 		{
 			get
@@ -753,7 +725,7 @@ namespace Tiresias.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="tiresiasdb.posts")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.posts")]
 	public partial class post : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -790,7 +762,7 @@ namespace Tiresias.DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_post_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_post_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int post_id
 		{
 			get
@@ -810,7 +782,7 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_post_type", DbType="NVarChar(45) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_post_type", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string post_type
 		{
 			get
@@ -911,7 +883,7 @@ namespace Tiresias.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="tiresiasdb.roles")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.roles")]
 	public partial class role : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -939,7 +911,7 @@ namespace Tiresias.DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int role_id
 		{
 			get
@@ -959,7 +931,7 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_name", DbType="NVarChar(45) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string role_name
 		{
 			get
@@ -1025,7 +997,7 @@ namespace Tiresias.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="tiresiasdb.submissions")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.submissions")]
 	public partial class submission : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1043,11 +1015,7 @@ namespace Tiresias.DAL
 		
 		private int _editor_id;
 		
-		private string _submissionscol;
-		
-		private System.Data.Linq.Binary _approved;
-		
-		private EntitySet<work> _works;
+		private bool _approved;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1065,19 +1033,16 @@ namespace Tiresias.DAL
     partial void Onsubmission_contentChanged();
     partial void Oneditor_idChanging(int value);
     partial void Oneditor_idChanged();
-    partial void OnsubmissionscolChanging(string value);
-    partial void OnsubmissionscolChanged();
-    partial void OnapprovedChanging(System.Data.Linq.Binary value);
+    partial void OnapprovedChanging(bool value);
     partial void OnapprovedChanged();
     #endregion
 		
 		public submission()
 		{
-			this._works = new EntitySet<work>(new Action<work>(this.attach_works), new Action<work>(this.detach_works));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submission_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submission_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int submission_id
 		{
 			get
@@ -1117,7 +1082,7 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submission_email", DbType="NVarChar(45) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submission_email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string submission_email
 		{
 			get
@@ -1197,28 +1162,8 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submissionscol", DbType="NVarChar(45)")]
-		public string submissionscol
-		{
-			get
-			{
-				return this._submissionscol;
-			}
-			set
-			{
-				if ((this._submissionscol != value))
-				{
-					this.OnsubmissionscolChanging(value);
-					this.SendPropertyChanging();
-					this._submissionscol = value;
-					this.SendPropertyChanged("submissionscol");
-					this.OnsubmissionscolChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_approved", DbType="Binary(1) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary approved
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_approved", DbType="Bit NOT NULL")]
+		public bool approved
 		{
 			get
 			{
@@ -1234,19 +1179,6 @@ namespace Tiresias.DAL
 					this.SendPropertyChanged("approved");
 					this.OnapprovedChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="submission_work", Storage="_works", ThisKey="submission_id", OtherKey="submission_id")]
-		public EntitySet<work> works
-		{
-			get
-			{
-				return this._works;
-			}
-			set
-			{
-				this._works.Assign(value);
 			}
 		}
 		
@@ -1269,21 +1201,9 @@ namespace Tiresias.DAL
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-		
-		private void attach_works(work entity)
-		{
-			this.SendPropertyChanging();
-			entity.submission = this;
-		}
-		
-		private void detach_works(work entity)
-		{
-			this.SendPropertyChanging();
-			entity.submission = null;
-		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="tiresiasdb.translators")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.translators")]
 	public partial class translator : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1318,7 +1238,7 @@ namespace Tiresias.DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_translator_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_translator_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int translator_id
 		{
 			get
@@ -1338,7 +1258,7 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_translator_name", DbType="NVarChar(55) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_translator_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string translator_name
 		{
 			get
@@ -1462,7 +1382,7 @@ namespace Tiresias.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="tiresiasdb.users")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.users")]
 	public partial class user : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1480,9 +1400,9 @@ namespace Tiresias.DAL
 		
 		private EntitySet<work> _works;
 		
-		private EntityRef<role> _role;
-		
 		private EntityRef<organization> _organization;
+		
+		private EntityRef<role> _role;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1503,12 +1423,12 @@ namespace Tiresias.DAL
 		public user()
 		{
 			this._works = new EntitySet<work>(new Action<work>(this.attach_works), new Action<work>(this.detach_works));
-			this._role = default(EntityRef<role>);
 			this._organization = default(EntityRef<organization>);
+			this._role = default(EntityRef<role>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int user_id
 		{
 			get
@@ -1528,7 +1448,7 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string email
 		{
 			get
@@ -1548,7 +1468,7 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NVarChar(45) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string password
 		{
 			get
@@ -1616,7 +1536,7 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_work", Storage="_works", ThisKey="user_id", OtherKey="user_entry_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_work", Storage="_works", ThisKey="user_id", OtherKey="user_entry_Id")]
 		public EntitySet<work> works
 		{
 			get
@@ -1626,40 +1546,6 @@ namespace Tiresias.DAL
 			set
 			{
 				this._works.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="role_user", Storage="_role", ThisKey="role_id", OtherKey="role_id", IsForeignKey=true)]
-		public role role
-		{
-			get
-			{
-				return this._role.Entity;
-			}
-			set
-			{
-				role previousValue = this._role.Entity;
-				if (((previousValue != value) 
-							|| (this._role.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._role.Entity = null;
-						previousValue.users.Remove(this);
-					}
-					this._role.Entity = value;
-					if ((value != null))
-					{
-						value.users.Add(this);
-						this._role_id = value.role_id;
-					}
-					else
-					{
-						this._role_id = default(int);
-					}
-					this.SendPropertyChanged("role");
-				}
 			}
 		}
 		
@@ -1697,6 +1583,40 @@ namespace Tiresias.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="role_user", Storage="_role", ThisKey="role_id", OtherKey="role_id", IsForeignKey=true)]
+		public role role
+		{
+			get
+			{
+				return this._role.Entity;
+			}
+			set
+			{
+				role previousValue = this._role.Entity;
+				if (((previousValue != value) 
+							|| (this._role.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._role.Entity = null;
+						previousValue.users.Remove(this);
+					}
+					this._role.Entity = value;
+					if ((value != null))
+					{
+						value.users.Add(this);
+						this._role_id = value.role_id;
+					}
+					else
+					{
+						this._role_id = default(int);
+					}
+					this.SendPropertyChanged("role");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1730,7 +1650,7 @@ namespace Tiresias.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="tiresiasdb.works")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.works")]
 	public partial class work : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1744,27 +1664,21 @@ namespace Tiresias.DAL
 		
 		private int _author_id;
 		
-		private int _lang_id;
+		private int _language_id;
 		
 		private int _translator_id;
 		
-		private int _submission_id;
-		
-		private int _user_entry_id;
+		private int _user_entry_Id;
 		
 		private int _metadata_id;
 		
 		private EntityRef<author> _author;
 		
-		private EntityRef<user> _user;
-		
 		private EntityRef<language> _language;
 		
-		private EntityRef<metadata> _metadata;
-		
-		private EntityRef<submission> _submission;
-		
 		private EntityRef<translator> _translator;
+		
+		private EntityRef<user> _user;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1778,14 +1692,12 @@ namespace Tiresias.DAL
     partial void OneditionChanged();
     partial void Onauthor_idChanging(int value);
     partial void Onauthor_idChanged();
-    partial void Onlang_idChanging(int value);
-    partial void Onlang_idChanged();
+    partial void Onlanguage_idChanging(int value);
+    partial void Onlanguage_idChanged();
     partial void Ontranslator_idChanging(int value);
     partial void Ontranslator_idChanged();
-    partial void Onsubmission_idChanging(int value);
-    partial void Onsubmission_idChanged();
-    partial void Onuser_entry_idChanging(int value);
-    partial void Onuser_entry_idChanged();
+    partial void Onuser_entry_IdChanging(int value);
+    partial void Onuser_entry_IdChanged();
     partial void Onmetadata_idChanging(int value);
     partial void Onmetadata_idChanged();
     #endregion
@@ -1793,15 +1705,13 @@ namespace Tiresias.DAL
 		public work()
 		{
 			this._author = default(EntityRef<author>);
-			this._user = default(EntityRef<user>);
 			this._language = default(EntityRef<language>);
-			this._metadata = default(EntityRef<metadata>);
-			this._submission = default(EntityRef<submission>);
 			this._translator = default(EntityRef<translator>);
+			this._user = default(EntityRef<user>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_work_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_work_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int work_id
 		{
 			get
@@ -1841,7 +1751,7 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_edition", DbType="NVarChar(15)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_edition", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string edition
 		{
 			get
@@ -1885,26 +1795,26 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lang_id", DbType="Int NOT NULL")]
-		public int lang_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_language_id", DbType="Int NOT NULL")]
+		public int language_id
 		{
 			get
 			{
-				return this._lang_id;
+				return this._language_id;
 			}
 			set
 			{
-				if ((this._lang_id != value))
+				if ((this._language_id != value))
 				{
 					if (this._language.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.Onlang_idChanging(value);
+					this.Onlanguage_idChanging(value);
 					this.SendPropertyChanging();
-					this._lang_id = value;
-					this.SendPropertyChanged("lang_id");
-					this.Onlang_idChanged();
+					this._language_id = value;
+					this.SendPropertyChanged("language_id");
+					this.Onlanguage_idChanged();
 				}
 			}
 		}
@@ -1933,50 +1843,26 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submission_id", DbType="Int NOT NULL")]
-		public int submission_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_entry_Id", DbType="Int NOT NULL")]
+		public int user_entry_Id
 		{
 			get
 			{
-				return this._submission_id;
+				return this._user_entry_Id;
 			}
 			set
 			{
-				if ((this._submission_id != value))
-				{
-					if (this._submission.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onsubmission_idChanging(value);
-					this.SendPropertyChanging();
-					this._submission_id = value;
-					this.SendPropertyChanged("submission_id");
-					this.Onsubmission_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_entry_id", DbType="Int NOT NULL")]
-		public int user_entry_id
-		{
-			get
-			{
-				return this._user_entry_id;
-			}
-			set
-			{
-				if ((this._user_entry_id != value))
+				if ((this._user_entry_Id != value))
 				{
 					if (this._user.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.Onuser_entry_idChanging(value);
+					this.Onuser_entry_IdChanging(value);
 					this.SendPropertyChanging();
-					this._user_entry_id = value;
-					this.SendPropertyChanged("user_entry_id");
-					this.Onuser_entry_idChanged();
+					this._user_entry_Id = value;
+					this.SendPropertyChanged("user_entry_Id");
+					this.Onuser_entry_IdChanged();
 				}
 			}
 		}
@@ -1992,10 +1878,6 @@ namespace Tiresias.DAL
 			{
 				if ((this._metadata_id != value))
 				{
-					if (this._metadata.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.Onmetadata_idChanging(value);
 					this.SendPropertyChanging();
 					this._metadata_id = value;
@@ -2039,41 +1921,7 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_work", Storage="_user", ThisKey="user_entry_id", OtherKey="user_id", IsForeignKey=true)]
-		public user user
-		{
-			get
-			{
-				return this._user.Entity;
-			}
-			set
-			{
-				user previousValue = this._user.Entity;
-				if (((previousValue != value) 
-							|| (this._user.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._user.Entity = null;
-						previousValue.works.Remove(this);
-					}
-					this._user.Entity = value;
-					if ((value != null))
-					{
-						value.works.Add(this);
-						this._user_entry_id = value.user_id;
-					}
-					else
-					{
-						this._user_entry_id = default(int);
-					}
-					this.SendPropertyChanged("user");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="language_work", Storage="_language", ThisKey="lang_id", OtherKey="language_id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="language_work", Storage="_language", ThisKey="language_id", OtherKey="language_id", IsForeignKey=true)]
 		public language language
 		{
 			get
@@ -2096,81 +1944,13 @@ namespace Tiresias.DAL
 					if ((value != null))
 					{
 						value.works.Add(this);
-						this._lang_id = value.language_id;
+						this._language_id = value.language_id;
 					}
 					else
 					{
-						this._lang_id = default(int);
+						this._language_id = default(int);
 					}
 					this.SendPropertyChanged("language");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="metadata_work", Storage="_metadata", ThisKey="metadata_id", OtherKey="metadata_id", IsForeignKey=true)]
-		public metadata metadata
-		{
-			get
-			{
-				return this._metadata.Entity;
-			}
-			set
-			{
-				metadata previousValue = this._metadata.Entity;
-				if (((previousValue != value) 
-							|| (this._metadata.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._metadata.Entity = null;
-						previousValue.works.Remove(this);
-					}
-					this._metadata.Entity = value;
-					if ((value != null))
-					{
-						value.works.Add(this);
-						this._metadata_id = value.metadata_id;
-					}
-					else
-					{
-						this._metadata_id = default(int);
-					}
-					this.SendPropertyChanged("metadata");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="submission_work", Storage="_submission", ThisKey="submission_id", OtherKey="submission_id", IsForeignKey=true)]
-		public submission submission
-		{
-			get
-			{
-				return this._submission.Entity;
-			}
-			set
-			{
-				submission previousValue = this._submission.Entity;
-				if (((previousValue != value) 
-							|| (this._submission.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._submission.Entity = null;
-						previousValue.works.Remove(this);
-					}
-					this._submission.Entity = value;
-					if ((value != null))
-					{
-						value.works.Add(this);
-						this._submission_id = value.submission_id;
-					}
-					else
-					{
-						this._submission_id = default(int);
-					}
-					this.SendPropertyChanged("submission");
 				}
 			}
 		}
@@ -2205,6 +1985,40 @@ namespace Tiresias.DAL
 						this._translator_id = default(int);
 					}
 					this.SendPropertyChanged("translator");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_work", Storage="_user", ThisKey="user_entry_Id", OtherKey="user_id", IsForeignKey=true)]
+		public user user
+		{
+			get
+			{
+				return this._user.Entity;
+			}
+			set
+			{
+				user previousValue = this._user.Entity;
+				if (((previousValue != value) 
+							|| (this._user.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._user.Entity = null;
+						previousValue.works.Remove(this);
+					}
+					this._user.Entity = value;
+					if ((value != null))
+					{
+						value.works.Add(this);
+						this._user_entry_Id = value.user_id;
+					}
+					else
+					{
+						this._user_entry_Id = default(int);
+					}
+					this.SendPropertyChanged("user");
 				}
 			}
 		}
