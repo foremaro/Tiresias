@@ -1180,6 +1180,7 @@
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\Article.cshtml" />
     <Content Include="Views\Entries\Index.cshtml" />
+    <Content Include="Views\Entries\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

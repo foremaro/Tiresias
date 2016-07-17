@@ -1,0 +1,68 @@
+﻿@model Tiresias.Models.Submission
+
+<div>
+    <h4>Submission</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.submission_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.submission_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.submission_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.submission_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.submission_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.submission_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.work_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.work_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.submission_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.submission_content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.editor_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.editor_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.approved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.approved)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

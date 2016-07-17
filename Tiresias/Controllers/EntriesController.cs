@@ -33,7 +33,21 @@ namespace Tiresias.Controllers
         // GET: Entries/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var myEntry = dbContext.submissions
+                   .Where(c => c.submission_id == id)
+                   .Select(s => new Submission
+                   {
+                       submission_id = s.submission_id,
+                       submission_date = s.submission_date,
+                       submission_content = s.submission_content,
+                       submission_email = s.submission_email,
+                       work_id = s.work_id,
+                       approved = s.approved,
+                       editor_id = s.editor_id
+                   })
+                   .SingleOrDefault();
+
+            return View(myEntry);
         }
 
         // GET: Entries/Create
