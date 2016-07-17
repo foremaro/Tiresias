@@ -18,6 +18,7 @@ namespace Tiresias.Controllers
         {
 
             var myBlogs = from p in dbContext.posts
+                          orderby p.post_date descending
                           select new Post
                           {
                               post_id = p.post_id,

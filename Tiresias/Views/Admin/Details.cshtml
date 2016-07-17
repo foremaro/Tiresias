@@ -1,0 +1,71 @@
+﻿@model Tiresias.Models.Submission
+
+<div>
+    <h4>Submission</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.submission_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.submission_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.submission_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.submission_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.submission_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.submission_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.work_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.work_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.submission_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.submission_content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.editor_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.editor_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.approved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.approved)
+        </dd>
+    </dl>
+    <div class="btn-group col-md-5 col-md-offset-5">
+        <button class="btn btn-success">Approve</button>
+        <button class="btn btn-danger">Reject</button>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {id = Model.submission_id}) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

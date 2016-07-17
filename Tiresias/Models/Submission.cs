@@ -10,7 +10,7 @@ namespace Tiresias.Models
     public class Submission
     {
 
-        [HiddenInput(DisplayValue = false)]
+       
         public int submission_id { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}")]

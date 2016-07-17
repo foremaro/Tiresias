@@ -1,41 +1,57 @@
 ﻿using System;
-using Tiresias.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Tiresias.DAL;
+using Tiresias.Models;
 
 namespace Tiresias.Controllers
 {
-    public class EntriesController : Controller
+    public class AdminController : Controller
     {
         public tiresiasDBcontextDataContext dbContext = new tiresiasDBcontextDataContext();
 
-        // GET: Entries
+
+        // GET: Admin
         public ActionResult Index()
         {
-            var myEntries = dbContext.submissions
-                .Where(a=>a.approved == true)
-                .Select(s => new Submission
-                          {
-                              submission_id  = s.submission_id,
-                              submission_date = s.submission_date,
-                              submission_content = s.submission_content,
-                              submission_email = s.submission_email,
-                              work_id = s.work_id,
-                              approved = s.approved,
-                              editor_id = s.editor_id
-                          });
-
-            return View(myEntries);
+            ViewBag.Message = "Admin Page";
+            
+            return View();
         }
 
-        // GET: Entries/Details/5
+        // GET: Admin/Details/5
         public ActionResult Details(int id)
         {
             var myEntry = dbContext.submissions
-                   .Where(c => c.submission_id == id)
+                     .Where(c => c.submission_id == id)
+                     .Select(s => new Submission
+                     {
+                         submission_id = s.submission_id,
+                         submission_date = s.submission_date,
+                         submission_content = s.submission_content,
+                         submission_email = s.submission_email,
+                         work_id = s.work_id,
+                         approved = s.approved,
+                         editor_id = s.editor_id
+                     })
+                     .SingleOrDefault();
+
+            return View(myEntry);
+        }
+
+        // GET: Admin/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // GET: Admin/Approvals
+        public ActionResult Approvals()
+        {
+            var myPendingEntry = dbContext.submissions
+                   .Where(c => c.approved == false)
                    .Select(s => new Submission
                    {
                        submission_id = s.submission_id,
@@ -45,19 +61,12 @@ namespace Tiresias.Controllers
                        work_id = s.work_id,
                        approved = s.approved,
                        editor_id = s.editor_id
-                   })
-                   .SingleOrDefault();
+                   });
 
-            return View(myEntry);
+            return View(myPendingEntry);
         }
 
-        // GET: Entries/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Entries/Create
+        // POST: Admin/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -73,13 +82,13 @@ namespace Tiresias.Controllers
             }
         }
 
-        // GET: Entries/Edit/5
+        // GET: Admin/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Entries/Edit/5
+        // POST: Admin/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -95,13 +104,13 @@ namespace Tiresias.Controllers
             }
         }
 
-        // GET: Entries/Delete/5
+        // GET: Admin/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Entries/Delete/5
+        // POST: Admin/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -116,14 +125,5 @@ namespace Tiresias.Controllers
                 return View();
             }
         }
-
-
-
-        public bool IsAuthorizedToEdit()
-        {
-            return true;
-        }
-
-
     }
 }

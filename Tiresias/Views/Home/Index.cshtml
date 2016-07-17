@@ -1,4 +1,6 @@
-﻿@{
+﻿@* Home Index *@
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -6,7 +8,7 @@
     <div class="col-md-4">
         <h2>View our latest entries.</h2>
         <p>A third option would be nice to place here.</p>
-        <p><a class="btn btn-default" href="#">Learn more &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Entries")">Learn more &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <h2>News/Blog</h2>

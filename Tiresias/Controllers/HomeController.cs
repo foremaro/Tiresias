@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Tiresias.DAL;
+using Tiresias.Models;
 
 namespace Tiresias.Controllers
 {
@@ -38,13 +39,7 @@ namespace Tiresias.Controllers
             return View();
         }
 
-
-        public ActionResult Admin()
-        {
-            ViewBag.Message = "Admin Page";
-
-            return View();
-        }
+        
 
 
     }

@@ -9,9 +9,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>@ViewBag.Title - Tiresias Web</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/cssBundle")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="~/Content/clean-blog.css" rel="stylesheet" />
     <link href="~/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -38,7 +38,7 @@
                     <li>@Html.ActionLink("Blog", "Index", "Blog")</li>
                     <li>@Html.ActionLink("Latest Entries", "Index", "Entries")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Admin", "Admin", "Home")</li>
+                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
                     <li>@Html.Partial("_LoginPartial")</li>
                 </ul>
                 
@@ -54,7 +54,7 @@
                     <div class="site-heading">
                         <h1>Tiresias Web</h1>
                         <hr class="small">
-                        <span class="subheading">(add subheading)</span>
+                        <span class="subheading">Prototype v1.0 7-17-2016</span>
                     </div>
                 </div>
             </div>
