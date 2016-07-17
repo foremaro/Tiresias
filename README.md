@@ -1,6 +1,4 @@
-<snippet>
-  <content><![CDATA[
-# ${1:Tiresias}
+#Tiresias
 This ASP.NET MVC web application is a prototype web-management system for Latin tree-bank translation entries. The app is deployed via Azure Cloud Services and utilizes MySql DBMS.
 Within this application, authenticated admin users can approve new entries, submit blog/news posts, add new users, and more.
 More details to come shortly.
@@ -12,17 +10,11 @@ TODO: Describe the installation process
 ## Usage
 TODO: Write usage instructions
 ## Contributing
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+TODO: Write contributing instructions
 ## History
 TODO: Write history
 ## Credits
 TODO: Write credits
 ## License
 TODO: Write license
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-</snippet>
+
