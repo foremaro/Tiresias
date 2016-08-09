@@ -1,0 +1,104 @@
+﻿@model Tiresias.Models.Work
+
+<div>
+    <h4>Work</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.edition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.edition)
+        </dd>
+
+
+
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.author_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.author_name)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.language)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.language)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.translator_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.translator_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.submission_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.submission_date)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_entry_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_entry_email)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.media_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.media_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.doi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.doi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isbn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isbn)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.work_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

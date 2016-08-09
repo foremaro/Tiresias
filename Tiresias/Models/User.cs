@@ -1,15 +1,19 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Tiresias.Models
 {
-    public class User
+    [Table("users")]
+    public class User: IUser<string>
     {
         [Required]
+        [Key]
         public int user_id { get; set; }
 
         [Required]
@@ -26,5 +30,26 @@ namespace Tiresias.Models
         public int organization_id { get; set; }
 
         public int role_id { get; set; }
+
+        public string Id
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string UserName
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

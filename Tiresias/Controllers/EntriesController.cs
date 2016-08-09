@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Tiresias.DAL;
+using Nelibur.ObjectMapper;
 
 namespace Tiresias.Controllers
 {
@@ -15,18 +16,24 @@ namespace Tiresias.Controllers
         // GET: Entries
         public ActionResult Index()
         {
-            var myEntries = dbContext.submissions
-                .Where(a=>a.approved == true)
-                .Select(s => new Submission
-                          {
-                              submission_id  = s.submission_id,
-                              submission_date = s.submission_date,
-                              submission_content = s.submission_content,
-                              submission_email = s.submission_email,
-                              work_id = s.work_id,
-                              approved = s.approved,
-                              editor_id = s.editor_id
-                          });
+            var myEntries = (from s in dbContext.submissions
+                             join w in dbContext.works on s.work_id equals w.work_id
+                             join a in dbContext.authors on w.author_id equals a.author_id
+                             join u in dbContext.users on s.editor_id equals u.user_id
+                             where s.approved == true
+                             select new Submission
+                             {
+                                 submission_id = s.submission_id,
+                                 submission_date = s.submission_date,
+                                 submission_content = s.submission_content,
+                                 submission_email = s.submission_email,
+                                 work_id = s.work_id,
+                                 work_title = w.title,
+                                 author_name = a.first_name + " " + a.last_name,
+                                 approved = s.approved,
+                                 editor_id = s.editor_id,
+                                 editor_email = u.email
+                             });
 
             return View(myEntries);
         }
@@ -34,19 +41,24 @@ namespace Tiresias.Controllers
         // GET: Entries/Details/5
         public ActionResult Details(int id)
         {
-            var myEntry = dbContext.submissions
-                   .Where(c => c.submission_id == id)
-                   .Select(s => new Submission
-                   {
-                       submission_id = s.submission_id,
-                       submission_date = s.submission_date,
-                       submission_content = s.submission_content,
-                       submission_email = s.submission_email,
-                       work_id = s.work_id,
-                       approved = s.approved,
-                       editor_id = s.editor_id
-                   })
-                   .SingleOrDefault();
+            var myEntry = (from s in dbContext.submissions
+                           join w in dbContext.works on s.work_id equals w.work_id
+                           join a in dbContext.authors on w.author_id equals a.author_id
+                           join u in dbContext.users on s.editor_id equals u.user_id
+                           where s.submission_id == id &&  s.approved == true
+                           select new Submission
+                           {
+                               submission_id = s.submission_id,
+                               submission_date = s.submission_date,
+                               submission_content = s.submission_content,
+                               submission_email = s.submission_email,
+                               work_id = s.work_id,
+                               work_title = w.title,
+                               author_name = a.first_name + " " + a.last_name,
+                               approved = s.approved,
+                               editor_id = s.editor_id,
+                               editor_email =u.email
+                           }).FirstOrDefault();
 
             return View(myEntry);
         }
@@ -59,11 +71,31 @@ namespace Tiresias.Controllers
 
         // POST: Entries/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Submission formToInsert)
         {
             try
             {
-                // TODO: Add insert logic here
+                submission dalSubmission = new submission
+                {
+                    submission_date = DateTime.Now,
+                    work_id = formToInsert.work_id,
+                    submission_content = formToInsert.submission_content,
+                    editor_id = formToInsert.editor_id,
+                    approved = false
+                };
+
+                // TODO: get userID
+                var currentUserIDbyEmail = (from u in dbContext.users
+                                           where u.email.Contains(formToInsert.submission_email)
+                                           select u.email).FirstOrDefault();
+
+                dalSubmission.submission_email = currentUserIDbyEmail;     // user id
+
+
+
+
+                dbContext.submissions.InsertOnSubmit(dalSubmission);
+                dbContext.SubmitChanges();
 
                 return RedirectToAction("Index");
             }
@@ -76,16 +108,43 @@ namespace Tiresias.Controllers
         // GET: Entries/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var myEntry = (from s in dbContext.submissions
+                           join w in dbContext.works on s.work_id equals w.work_id
+                           join a in dbContext.authors on w.author_id equals a.author_id
+                           join u in dbContext.users on s.editor_id equals u.user_id
+                           where s.submission_id == id && s.approved == true
+                           select new Submission
+                           {
+                               submission_id = s.submission_id,
+                               submission_date = s.submission_date,
+                               submission_content = s.submission_content,
+                               submission_email = s.submission_email,
+                               work_id = s.work_id,
+                               work_title = w.title,
+                               author_name = a.first_name + " " + a.last_name,
+                               approved = s.approved,
+                               editor_id = s.editor_id,
+                               editor_email = u.email
+                           }).FirstOrDefault();
+            return View(myEntry);
         }
 
         // POST: Entries/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Submission submissionToInsert)
         {
             try
             {
-                // TODO: Add update logic here
+                submission dalSubmission = (from s in dbContext.submissions
+                                     where s.submission_id == submissionToInsert.submission_id
+                                     select s).FirstOrDefault();
+                dalSubmission.submission_date = DateTime.Now;
+                dalSubmission.submission_email = submissionToInsert.submission_email;
+                dalSubmission.work_id = submissionToInsert.work_id;
+                dalSubmission.submission_content = submissionToInsert.submission_content;
+                dalSubmission.editor_id = submissionToInsert.editor_id; // need to write methods to get all kinds of ids
+                dalSubmission.approved = false; // submit changes for approval
+                dbContext.SubmitChanges();
 
                 return RedirectToAction("Index");
             }
@@ -121,6 +180,7 @@ namespace Tiresias.Controllers
 
         public bool IsAuthorizedToEdit()
         {
+            // return true if user's role_id between 1 and 3 
             return true;
         }
 

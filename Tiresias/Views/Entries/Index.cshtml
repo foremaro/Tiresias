@@ -3,7 +3,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table table-responsive col-lg-12">
+<table class="table table-bordered table-responsive col-lg-12">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.submission_date)
@@ -21,7 +21,6 @@
         <th>
             hide this column if not admin
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -46,9 +45,9 @@
         </td>
         
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Edit", "Edit", new { id = item.submission_id }) |
             @Html.ActionLink("Details", "Details", new { id=item.submission_id  }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Delete", "Delete", new { id = item.submission_id })
         </td>
     </tr>
 }

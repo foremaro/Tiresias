@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Mvc;
 
 namespace Tiresias.Models
 {
+    [Table("posts")]
     public class Post
     {
+        [Key]
         [HiddenInput(DisplayValue = false)]
         public int post_id { get; set; }
 

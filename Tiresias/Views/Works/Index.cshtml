@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Tiresias.Models.Work>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-striped" id="worksTable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.edition)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.author_name)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.language)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.translator_name)
+        </th>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.user_entry_email)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.media_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.doi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isbn)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.edition)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.author_name)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.language)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.translator_name)
+        </td>
+
+
+        <td>
+            @Html.DisplayFor(modelItem => item.user_entry_email)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.media_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.doi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isbn)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.work_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.work_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.work_id })
+        </td>
+    </tr>
+}
+
+</table>

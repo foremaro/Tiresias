@@ -5,14 +5,6 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.submission_id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.submission_id)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.submission_date)
         </dt>
 
@@ -29,11 +21,27 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.author_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.author_name)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.work_id)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.work_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.work_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.work_title)
         </dd>
 
         <dt>
@@ -53,6 +61,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.editor_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.editor_email)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.approved)
         </dt>
 
@@ -63,6 +79,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.submission_id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
