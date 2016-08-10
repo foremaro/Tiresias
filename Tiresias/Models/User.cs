@@ -10,7 +10,7 @@ using System.Web.Mvc;
 namespace Tiresias.Models
 {
     [Table("users")]
-    public class User: IUser<string>
+    public class User
     {
         [Required]
         [Key]
@@ -30,26 +30,30 @@ namespace Tiresias.Models
         public int organization_id { get; set; }
 
         public int role_id { get; set; }
+        [Display(Name ="Role")]
+        public string RoleName { get; set; }
+        [Display(Name ="Organization")]
+        public string OrgName { get; set; }
 
-        public string Id
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        //public string Id
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
 
-        public string UserName
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        //public string UserName
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
     }
 }

@@ -20,7 +20,7 @@ namespace Tiresias.Controllers
                              join w in dbContext.works on s.work_id equals w.work_id
                              join a in dbContext.authors on w.author_id equals a.author_id
                              join u in dbContext.users on s.editor_id equals u.user_id
-                             where s.approved == true
+                             where s.approved == true && s.active == true
                              select new Submission
                              {
                                  submission_id = s.submission_id,
@@ -157,16 +157,38 @@ namespace Tiresias.Controllers
         // GET: Entries/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var myEntry = (from s in dbContext.submissions
+                           join w in dbContext.works on s.work_id equals w.work_id
+                           join a in dbContext.authors on w.author_id equals a.author_id
+                           join u in dbContext.users on s.editor_id equals u.user_id
+                           where s.submission_id == id && s.approved == true
+                           select new Submission
+                           {
+                               submission_id = s.submission_id,
+                               submission_date = s.submission_date,
+                               submission_content = s.submission_content,
+                               submission_email = s.submission_email,
+                               work_id = s.work_id,
+                               work_title = w.title,
+                               author_name = a.first_name + " " + a.last_name,
+                               approved = s.approved,
+                               editor_id = s.editor_id,
+                               editor_email = u.email
+                           }).FirstOrDefault();
+            return View(myEntry);
         }
 
         // POST: Entries/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult DeleteConfirmed(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                var entryToDelete = (from s in dbContext.submissions
+                                     where s.submission_id == id
+                                     select s).FirstOrDefault();
+                entryToDelete.active = false;
+                dbContext.SubmitChanges();
 
                 return RedirectToAction("Index");
             }

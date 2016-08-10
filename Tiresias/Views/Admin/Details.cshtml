@@ -61,11 +61,19 @@
         </dd>
     </dl>
     <div class="btn-group col-md-5 col-md-offset-5">
-        <button class="btn btn-success">Approve</button>
-        <button class="btn btn-danger">Reject</button>
+
+        @using (Html.BeginForm("Approve", "Admin", new { id = Model.submission_id }, FormMethod.Post))
+        {
+            <button type="submit" class="btn btn-success">Approve</button>
+        }
+        @using (Html.BeginForm("Reject", "Admin", new { id = Model.submission_id }, FormMethod.Post))
+        {
+            <button type="submit" class="btn btn-danger">Reject</button>
+        }
+
     </div>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new {id = Model.submission_id}) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.submission_id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

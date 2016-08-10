@@ -23,20 +23,22 @@ namespace Tiresias.Models
         [Display(Name = "Email")]
         public string submission_email { get; set; }
 
-    
+        [Display(Name ="Author Name")]
         public string author_name { get; set; }
-        
 
+        [HiddenInput(DisplayValue = false)]
         public int work_id { get; set; }
+
+        [Display(Name = "Title")]
         public string work_title { get; set; }
 
         [Display(Name = "Comments")]
         public string submission_content { get; set; }
 
-        [Display(Name ="Approved by")]
+        [HiddenInput]
         public int editor_id { get; set; }
 
-        [Display(Name ="Editor email")]
+        [Display(Name = "Approved by")]
         public string editor_email { get; set; }
 
         [HiddenInput(DisplayValue = false)]

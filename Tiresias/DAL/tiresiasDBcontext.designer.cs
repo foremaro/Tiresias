@@ -48,15 +48,15 @@ namespace Tiresias.DAL
     partial void Insertrole(role instance);
     partial void Updaterole(role instance);
     partial void Deleterole(role instance);
-    partial void Insertsubmission(submission instance);
-    partial void Updatesubmission(submission instance);
-    partial void Deletesubmission(submission instance);
     partial void Inserttranslator(translator instance);
     partial void Updatetranslator(translator instance);
     partial void Deletetranslator(translator instance);
     partial void Insertuser(user instance);
     partial void Updateuser(user instance);
     partial void Deleteuser(user instance);
+    partial void Insertsubmission(submission instance);
+    partial void Updatesubmission(submission instance);
+    partial void Deletesubmission(submission instance);
     partial void Insertwork(work instance);
     partial void Updatework(work instance);
     partial void Deletework(work instance);
@@ -140,14 +140,6 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<submission> submissions
-		{
-			get
-			{
-				return this.GetTable<submission>();
-			}
-		}
-		
 		public System.Data.Linq.Table<translator> translators
 		{
 			get
@@ -161,6 +153,14 @@ namespace Tiresias.DAL
 			get
 			{
 				return this.GetTable<user>();
+			}
+		}
+		
+		public System.Data.Linq.Table<submission> submissions
+		{
+			get
+			{
+				return this.GetTable<submission>();
 			}
 		}
 		
@@ -997,212 +997,6 @@ namespace Tiresias.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.submissions")]
-	public partial class submission : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _submission_id;
-		
-		private System.DateTime _submission_date;
-		
-		private string _submission_email;
-		
-		private int _work_id;
-		
-		private string _submission_content;
-		
-		private int _editor_id;
-		
-		private bool _approved;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onsubmission_idChanging(int value);
-    partial void Onsubmission_idChanged();
-    partial void Onsubmission_dateChanging(System.DateTime value);
-    partial void Onsubmission_dateChanged();
-    partial void Onsubmission_emailChanging(string value);
-    partial void Onsubmission_emailChanged();
-    partial void Onwork_idChanging(int value);
-    partial void Onwork_idChanged();
-    partial void Onsubmission_contentChanging(string value);
-    partial void Onsubmission_contentChanged();
-    partial void Oneditor_idChanging(int value);
-    partial void Oneditor_idChanged();
-    partial void OnapprovedChanging(bool value);
-    partial void OnapprovedChanged();
-    #endregion
-		
-		public submission()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submission_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int submission_id
-		{
-			get
-			{
-				return this._submission_id;
-			}
-			set
-			{
-				if ((this._submission_id != value))
-				{
-					this.Onsubmission_idChanging(value);
-					this.SendPropertyChanging();
-					this._submission_id = value;
-					this.SendPropertyChanged("submission_id");
-					this.Onsubmission_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submission_date", DbType="DateTime2 NOT NULL")]
-		public System.DateTime submission_date
-		{
-			get
-			{
-				return this._submission_date;
-			}
-			set
-			{
-				if ((this._submission_date != value))
-				{
-					this.Onsubmission_dateChanging(value);
-					this.SendPropertyChanging();
-					this._submission_date = value;
-					this.SendPropertyChanged("submission_date");
-					this.Onsubmission_dateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submission_email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string submission_email
-		{
-			get
-			{
-				return this._submission_email;
-			}
-			set
-			{
-				if ((this._submission_email != value))
-				{
-					this.Onsubmission_emailChanging(value);
-					this.SendPropertyChanging();
-					this._submission_email = value;
-					this.SendPropertyChanged("submission_email");
-					this.Onsubmission_emailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_work_id", DbType="Int NOT NULL")]
-		public int work_id
-		{
-			get
-			{
-				return this._work_id;
-			}
-			set
-			{
-				if ((this._work_id != value))
-				{
-					this.Onwork_idChanging(value);
-					this.SendPropertyChanging();
-					this._work_id = value;
-					this.SendPropertyChanged("work_id");
-					this.Onwork_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submission_content", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string submission_content
-		{
-			get
-			{
-				return this._submission_content;
-			}
-			set
-			{
-				if ((this._submission_content != value))
-				{
-					this.Onsubmission_contentChanging(value);
-					this.SendPropertyChanging();
-					this._submission_content = value;
-					this.SendPropertyChanged("submission_content");
-					this.Onsubmission_contentChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_editor_id", DbType="Int NOT NULL")]
-		public int editor_id
-		{
-			get
-			{
-				return this._editor_id;
-			}
-			set
-			{
-				if ((this._editor_id != value))
-				{
-					this.Oneditor_idChanging(value);
-					this.SendPropertyChanging();
-					this._editor_id = value;
-					this.SendPropertyChanged("editor_id");
-					this.Oneditor_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_approved", DbType="Bit NOT NULL")]
-		public bool approved
-		{
-			get
-			{
-				return this._approved;
-			}
-			set
-			{
-				if ((this._approved != value))
-				{
-					this.OnapprovedChanging(value);
-					this.SendPropertyChanging();
-					this._approved = value;
-					this.SendPropertyChanged("approved");
-					this.OnapprovedChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.translators")]
 	public partial class translator : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1398,6 +1192,8 @@ namespace Tiresias.DAL
 		
 		private int _role_id;
 		
+		private EntitySet<submission> _submissions;
+		
 		private EntitySet<work> _works;
 		
 		private EntityRef<organization> _organization;
@@ -1422,6 +1218,7 @@ namespace Tiresias.DAL
 		
 		public user()
 		{
+			this._submissions = new EntitySet<submission>(new Action<submission>(this.attach_submissions), new Action<submission>(this.detach_submissions));
 			this._works = new EntitySet<work>(new Action<work>(this.attach_works), new Action<work>(this.detach_works));
 			this._organization = default(EntityRef<organization>);
 			this._role = default(EntityRef<role>);
@@ -1536,6 +1333,19 @@ namespace Tiresias.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_submission", Storage="_submissions", ThisKey="user_id", OtherKey="editor_id")]
+		public EntitySet<submission> submissions
+		{
+			get
+			{
+				return this._submissions;
+			}
+			set
+			{
+				this._submissions.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_work", Storage="_works", ThisKey="user_id", OtherKey="user_entry_Id")]
 		public EntitySet<work> works
 		{
@@ -1637,6 +1447,18 @@ namespace Tiresias.DAL
 			}
 		}
 		
+		private void attach_submissions(submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = this;
+		}
+		
+		private void detach_submissions(submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = null;
+		}
+		
 		private void attach_works(work entity)
 		{
 			this.SendPropertyChanging();
@@ -1647,6 +1469,318 @@ namespace Tiresias.DAL
 		{
 			this.SendPropertyChanging();
 			entity.user = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.submissions")]
+	public partial class submission : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _submission_id;
+		
+		private System.DateTime _submission_date;
+		
+		private string _submission_email;
+		
+		private int _work_id;
+		
+		private string _submission_content;
+		
+		private int _editor_id;
+		
+		private bool _approved;
+		
+		private System.Nullable<bool> _active;
+		
+		private EntityRef<user> _user;
+		
+		private EntityRef<work> _work;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onsubmission_idChanging(int value);
+    partial void Onsubmission_idChanged();
+    partial void Onsubmission_dateChanging(System.DateTime value);
+    partial void Onsubmission_dateChanged();
+    partial void Onsubmission_emailChanging(string value);
+    partial void Onsubmission_emailChanged();
+    partial void Onwork_idChanging(int value);
+    partial void Onwork_idChanged();
+    partial void Onsubmission_contentChanging(string value);
+    partial void Onsubmission_contentChanged();
+    partial void Oneditor_idChanging(int value);
+    partial void Oneditor_idChanged();
+    partial void OnapprovedChanging(bool value);
+    partial void OnapprovedChanged();
+    partial void OnactiveChanging(System.Nullable<bool> value);
+    partial void OnactiveChanged();
+    #endregion
+		
+		public submission()
+		{
+			this._user = default(EntityRef<user>);
+			this._work = default(EntityRef<work>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submission_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int submission_id
+		{
+			get
+			{
+				return this._submission_id;
+			}
+			set
+			{
+				if ((this._submission_id != value))
+				{
+					this.Onsubmission_idChanging(value);
+					this.SendPropertyChanging();
+					this._submission_id = value;
+					this.SendPropertyChanged("submission_id");
+					this.Onsubmission_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submission_date", DbType="DateTime2 NOT NULL")]
+		public System.DateTime submission_date
+		{
+			get
+			{
+				return this._submission_date;
+			}
+			set
+			{
+				if ((this._submission_date != value))
+				{
+					this.Onsubmission_dateChanging(value);
+					this.SendPropertyChanging();
+					this._submission_date = value;
+					this.SendPropertyChanged("submission_date");
+					this.Onsubmission_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submission_email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string submission_email
+		{
+			get
+			{
+				return this._submission_email;
+			}
+			set
+			{
+				if ((this._submission_email != value))
+				{
+					this.Onsubmission_emailChanging(value);
+					this.SendPropertyChanging();
+					this._submission_email = value;
+					this.SendPropertyChanged("submission_email");
+					this.Onsubmission_emailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_work_id", DbType="Int NOT NULL")]
+		public int work_id
+		{
+			get
+			{
+				return this._work_id;
+			}
+			set
+			{
+				if ((this._work_id != value))
+				{
+					if (this._work.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onwork_idChanging(value);
+					this.SendPropertyChanging();
+					this._work_id = value;
+					this.SendPropertyChanged("work_id");
+					this.Onwork_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submission_content", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string submission_content
+		{
+			get
+			{
+				return this._submission_content;
+			}
+			set
+			{
+				if ((this._submission_content != value))
+				{
+					this.Onsubmission_contentChanging(value);
+					this.SendPropertyChanging();
+					this._submission_content = value;
+					this.SendPropertyChanged("submission_content");
+					this.Onsubmission_contentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_editor_id", DbType="Int NOT NULL")]
+		public int editor_id
+		{
+			get
+			{
+				return this._editor_id;
+			}
+			set
+			{
+				if ((this._editor_id != value))
+				{
+					if (this._user.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Oneditor_idChanging(value);
+					this.SendPropertyChanging();
+					this._editor_id = value;
+					this.SendPropertyChanged("editor_id");
+					this.Oneditor_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_approved", DbType="Bit NOT NULL")]
+		public bool approved
+		{
+			get
+			{
+				return this._approved;
+			}
+			set
+			{
+				if ((this._approved != value))
+				{
+					this.OnapprovedChanging(value);
+					this.SendPropertyChanging();
+					this._approved = value;
+					this.SendPropertyChanged("approved");
+					this.OnapprovedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit")]
+		public System.Nullable<bool> active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this.OnactiveChanging(value);
+					this.SendPropertyChanging();
+					this._active = value;
+					this.SendPropertyChanged("active");
+					this.OnactiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_submission", Storage="_user", ThisKey="editor_id", OtherKey="user_id", IsForeignKey=true)]
+		public user user
+		{
+			get
+			{
+				return this._user.Entity;
+			}
+			set
+			{
+				user previousValue = this._user.Entity;
+				if (((previousValue != value) 
+							|| (this._user.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._user.Entity = null;
+						previousValue.submissions.Remove(this);
+					}
+					this._user.Entity = value;
+					if ((value != null))
+					{
+						value.submissions.Add(this);
+						this._editor_id = value.user_id;
+					}
+					else
+					{
+						this._editor_id = default(int);
+					}
+					this.SendPropertyChanged("user");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="work_submission", Storage="_work", ThisKey="work_id", OtherKey="work_id", IsForeignKey=true)]
+		public work work
+		{
+			get
+			{
+				return this._work.Entity;
+			}
+			set
+			{
+				work previousValue = this._work.Entity;
+				if (((previousValue != value) 
+							|| (this._work.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._work.Entity = null;
+						previousValue.submissions.Remove(this);
+					}
+					this._work.Entity = value;
+					if ((value != null))
+					{
+						value.submissions.Add(this);
+						this._work_id = value.work_id;
+					}
+					else
+					{
+						this._work_id = default(int);
+					}
+					this.SendPropertyChanged("work");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -1671,6 +1805,10 @@ namespace Tiresias.DAL
 		private int _user_entry_Id;
 		
 		private int _metadata_id;
+		
+		private System.Nullable<bool> _active;
+		
+		private EntitySet<submission> _submissions;
 		
 		private EntityRef<author> _author;
 		
@@ -1700,10 +1838,13 @@ namespace Tiresias.DAL
     partial void Onuser_entry_IdChanged();
     partial void Onmetadata_idChanging(int value);
     partial void Onmetadata_idChanged();
+    partial void OnactiveChanging(System.Nullable<bool> value);
+    partial void OnactiveChanged();
     #endregion
 		
 		public work()
 		{
+			this._submissions = new EntitySet<submission>(new Action<submission>(this.attach_submissions), new Action<submission>(this.detach_submissions));
 			this._author = default(EntityRef<author>);
 			this._language = default(EntityRef<language>);
 			this._translator = default(EntityRef<translator>);
@@ -1887,6 +2028,39 @@ namespace Tiresias.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit")]
+		public System.Nullable<bool> active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this.OnactiveChanging(value);
+					this.SendPropertyChanging();
+					this._active = value;
+					this.SendPropertyChanged("active");
+					this.OnactiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="work_submission", Storage="_submissions", ThisKey="work_id", OtherKey="work_id")]
+		public EntitySet<submission> submissions
+		{
+			get
+			{
+				return this._submissions;
+			}
+			set
+			{
+				this._submissions.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="author_work", Storage="_author", ThisKey="author_id", OtherKey="author_id", IsForeignKey=true)]
 		public author author
 		{
@@ -2041,6 +2215,18 @@ namespace Tiresias.DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_submissions(submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.work = this;
+		}
+		
+		private void detach_submissions(submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.work = null;
 		}
 	}
 }

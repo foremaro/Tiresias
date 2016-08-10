@@ -21,7 +21,8 @@ namespace Tiresias.Controllers
                           join t in dbContext.translators on w.translator_id equals t.translator_id
                           join u in dbContext.users on w.user_entry_Id equals u.user_id
                           join m in dbContext.metadatas on w.metadata_id equals m.metadata_id
-                          orderby w.work_id
+                          where w.active == true
+                          orderby w.title
                           select new Work
                           {
                               work_id = w.work_id,
@@ -194,19 +195,56 @@ namespace Tiresias.Controllers
         // GET: Works/Edit/5
         public ActionResult Edit(int id)
         {
+            var myWork = (from w in dbContext.works
+                          join a in dbContext.authors on w.author_id equals a.author_id
+                          join l in dbContext.languages on w.language_id equals l.language_id
+                          join t in dbContext.translators on w.translator_id equals t.translator_id
+                          join u in dbContext.users on w.user_entry_Id equals u.user_id
+                          join m in dbContext.metadatas on w.metadata_id equals m.metadata_id
+                          join o in dbContext.organizations on t.organization_id equals o.organization_id
+                          where w.work_id == id
+                          select new Work
+                          {
+                              work_id = w.work_id,
+                              title = w.title,
+                              edition = w.edition,
+                              author_id = w.author_id,
+                              author_name = a.first_name + " " + a.last_name,
+                              language_id = w.language_id,
+                              language = l.language_name,
+                              translator_id = w.translator_id,
+                              translator_name = t.translator_name,
+                              user_entry_id = w.user_entry_Id,
+                              organization_name = o.orginization_name, 
+                              user_entry_email = u.email,
+                              metadata_id = w.metadata_id,
+                              media_type = m.media_type,
+                              doi = m.doi,
+                              isbn = m.isbn
+                          }).FirstOrDefault();
 
-
-            return View();
+            return View(myWork);
         }
 
         // POST: Works/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Work workToUpdate)
         {
             try
             {
                 // TODO: Add update logic here
+                work dalWork = (from w in dbContext.works
+                                where w.work_id == workToUpdate.work_id
+                                select w).FirstOrDefault();
 
+                dalWork.title = workToUpdate.title;
+                dalWork.author_id = workToUpdate.author_id;
+                dalWork.edition = workToUpdate.edition;                
+                dalWork.language_id = workToUpdate.language_id;
+                dalWork.translator_id = workToUpdate.translator_id;
+                dalWork.metadata_id = workToUpdate.metadata_id;
+                dalWork.user_entry_Id = workToUpdate.user_entry_id;
+                dbContext.SubmitChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -218,16 +256,48 @@ namespace Tiresias.Controllers
         // GET: Works/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var myWork = (from w in dbContext.works
+                          join a in dbContext.authors on w.author_id equals a.author_id
+                          join l in dbContext.languages on w.language_id equals l.language_id
+                          join t in dbContext.translators on w.translator_id equals t.translator_id
+                          join u in dbContext.users on w.user_entry_Id equals u.user_id
+                          join m in dbContext.metadatas on w.metadata_id equals m.metadata_id
+                          join o in dbContext.organizations on t.organization_id equals o.organization_id
+                          where w.work_id == id
+                          select new Work
+                          {
+                              work_id = w.work_id,
+                              title = w.title,
+                              edition = w.edition,
+                              author_id = w.author_id,
+                              author_name = a.first_name + " " + a.last_name,
+                              language_id = w.language_id,
+                              language = l.language_name,
+                              translator_id = w.translator_id,
+                              translator_name = t.translator_name,
+                              user_entry_id = w.user_entry_Id,
+                              organization_name = o.orginization_name,
+                              user_entry_email = u.email,
+                              metadata_id = w.metadata_id,
+                              media_type = m.media_type,
+                              doi = m.doi,
+                              isbn = m.isbn
+                          }).FirstOrDefault();
+
+            return View(myWork);
         }
 
         // POST: Works/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult DeleteConfirmed(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                var workToDelete = (from w in dbContext.works
+                                    where w.work_id == id
+                                    select w).FirstOrDefault();
+                workToDelete.active = false;
+                dbContext.SubmitChanges();
 
                 return RedirectToAction("Index");
             }

@@ -54,8 +54,7 @@
                 @Html.DisplayFor(modelItem => item.approved)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.submission_id }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Details", "Details", new { id = item.submission_id })
             </td>
         </tr>
     }
