@@ -1201,6 +1201,9 @@
     <Content Include="Views\Entries\Delete.cshtml" />
     <Content Include="Views\Works\Delete.cshtml" />
     <Content Include="Views\Admin\UserMGMT.cshtml" />
+    <Content Include="Views\Admin\CreateUser.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Admin\DeleteUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -28,12 +28,14 @@ namespace Tiresias.Models
         public string password { get; set; }
 
         public int organization_id { get; set; }
-
+        [Display(Name = "Role")]
         public int role_id { get; set; }
-        [Display(Name ="Role")]
+        
         public string RoleName { get; set; }
         [Display(Name ="Organization")]
         public string OrgName { get; set; }
+
+        public bool active { get; set; }
 
         //public string Id
         //{

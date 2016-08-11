@@ -51,15 +51,15 @@ namespace Tiresias.DAL
     partial void Inserttranslator(translator instance);
     partial void Updatetranslator(translator instance);
     partial void Deletetranslator(translator instance);
-    partial void Insertuser(user instance);
-    partial void Updateuser(user instance);
-    partial void Deleteuser(user instance);
     partial void Insertsubmission(submission instance);
     partial void Updatesubmission(submission instance);
     partial void Deletesubmission(submission instance);
     partial void Insertwork(work instance);
     partial void Updatework(work instance);
     partial void Deletework(work instance);
+    partial void Insertuser(user instance);
+    partial void Updateuser(user instance);
+    partial void Deleteuser(user instance);
     #endregion
 		
 		public tiresiasDBcontextDataContext() : 
@@ -148,14 +148,6 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<user> users
-		{
-			get
-			{
-				return this.GetTable<user>();
-			}
-		}
-		
 		public System.Data.Linq.Table<submission> submissions
 		{
 			get
@@ -169,6 +161,14 @@ namespace Tiresias.DAL
 			get
 			{
 				return this.GetTable<work>();
+			}
+		}
+		
+		public System.Data.Linq.Table<user> users
+		{
+			get
+			{
+				return this.GetTable<user>();
 			}
 		}
 	}
@@ -1176,302 +1176,6 @@ namespace Tiresias.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.users")]
-	public partial class user : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _user_id;
-		
-		private string _email;
-		
-		private string _password;
-		
-		private int _organization_id;
-		
-		private int _role_id;
-		
-		private EntitySet<submission> _submissions;
-		
-		private EntitySet<work> _works;
-		
-		private EntityRef<organization> _organization;
-		
-		private EntityRef<role> _role;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onuser_idChanging(int value);
-    partial void Onuser_idChanged();
-    partial void OnemailChanging(string value);
-    partial void OnemailChanged();
-    partial void OnpasswordChanging(string value);
-    partial void OnpasswordChanged();
-    partial void Onorganization_idChanging(int value);
-    partial void Onorganization_idChanged();
-    partial void Onrole_idChanging(int value);
-    partial void Onrole_idChanged();
-    #endregion
-		
-		public user()
-		{
-			this._submissions = new EntitySet<submission>(new Action<submission>(this.attach_submissions), new Action<submission>(this.detach_submissions));
-			this._works = new EntitySet<work>(new Action<work>(this.attach_works), new Action<work>(this.detach_works));
-			this._organization = default(EntityRef<organization>);
-			this._role = default(EntityRef<role>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int user_id
-		{
-			get
-			{
-				return this._user_id;
-			}
-			set
-			{
-				if ((this._user_id != value))
-				{
-					this.Onuser_idChanging(value);
-					this.SendPropertyChanging();
-					this._user_id = value;
-					this.SendPropertyChanged("user_id");
-					this.Onuser_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string email
-		{
-			get
-			{
-				return this._email;
-			}
-			set
-			{
-				if ((this._email != value))
-				{
-					this.OnemailChanging(value);
-					this.SendPropertyChanging();
-					this._email = value;
-					this.SendPropertyChanged("email");
-					this.OnemailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string password
-		{
-			get
-			{
-				return this._password;
-			}
-			set
-			{
-				if ((this._password != value))
-				{
-					this.OnpasswordChanging(value);
-					this.SendPropertyChanging();
-					this._password = value;
-					this.SendPropertyChanged("password");
-					this.OnpasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_organization_id", DbType="Int NOT NULL")]
-		public int organization_id
-		{
-			get
-			{
-				return this._organization_id;
-			}
-			set
-			{
-				if ((this._organization_id != value))
-				{
-					if (this._organization.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onorganization_idChanging(value);
-					this.SendPropertyChanging();
-					this._organization_id = value;
-					this.SendPropertyChanged("organization_id");
-					this.Onorganization_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_id", DbType="Int NOT NULL")]
-		public int role_id
-		{
-			get
-			{
-				return this._role_id;
-			}
-			set
-			{
-				if ((this._role_id != value))
-				{
-					if (this._role.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onrole_idChanging(value);
-					this.SendPropertyChanging();
-					this._role_id = value;
-					this.SendPropertyChanged("role_id");
-					this.Onrole_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_submission", Storage="_submissions", ThisKey="user_id", OtherKey="editor_id")]
-		public EntitySet<submission> submissions
-		{
-			get
-			{
-				return this._submissions;
-			}
-			set
-			{
-				this._submissions.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_work", Storage="_works", ThisKey="user_id", OtherKey="user_entry_Id")]
-		public EntitySet<work> works
-		{
-			get
-			{
-				return this._works;
-			}
-			set
-			{
-				this._works.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="organization_user", Storage="_organization", ThisKey="organization_id", OtherKey="organization_id", IsForeignKey=true)]
-		public organization organization
-		{
-			get
-			{
-				return this._organization.Entity;
-			}
-			set
-			{
-				organization previousValue = this._organization.Entity;
-				if (((previousValue != value) 
-							|| (this._organization.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._organization.Entity = null;
-						previousValue.users.Remove(this);
-					}
-					this._organization.Entity = value;
-					if ((value != null))
-					{
-						value.users.Add(this);
-						this._organization_id = value.organization_id;
-					}
-					else
-					{
-						this._organization_id = default(int);
-					}
-					this.SendPropertyChanged("organization");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="role_user", Storage="_role", ThisKey="role_id", OtherKey="role_id", IsForeignKey=true)]
-		public role role
-		{
-			get
-			{
-				return this._role.Entity;
-			}
-			set
-			{
-				role previousValue = this._role.Entity;
-				if (((previousValue != value) 
-							|| (this._role.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._role.Entity = null;
-						previousValue.users.Remove(this);
-					}
-					this._role.Entity = value;
-					if ((value != null))
-					{
-						value.users.Add(this);
-						this._role_id = value.role_id;
-					}
-					else
-					{
-						this._role_id = default(int);
-					}
-					this.SendPropertyChanged("role");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_submissions(submission entity)
-		{
-			this.SendPropertyChanging();
-			entity.user = this;
-		}
-		
-		private void detach_submissions(submission entity)
-		{
-			this.SendPropertyChanging();
-			entity.user = null;
-		}
-		
-		private void attach_works(work entity)
-		{
-			this.SendPropertyChanging();
-			entity.user = this;
-		}
-		
-		private void detach_works(work entity)
-		{
-			this.SendPropertyChanging();
-			entity.user = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.submissions")]
 	public partial class submission : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1494,9 +1198,9 @@ namespace Tiresias.DAL
 		
 		private System.Nullable<bool> _active;
 		
-		private EntityRef<user> _user;
-		
 		private EntityRef<work> _work;
+		
+		private EntityRef<user> _user;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1522,8 +1226,8 @@ namespace Tiresias.DAL
 		
 		public submission()
 		{
-			this._user = default(EntityRef<user>);
 			this._work = default(EntityRef<work>);
+			this._user = default(EntityRef<user>);
 			OnCreated();
 		}
 		
@@ -1695,40 +1399,6 @@ namespace Tiresias.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_submission", Storage="_user", ThisKey="editor_id", OtherKey="user_id", IsForeignKey=true)]
-		public user user
-		{
-			get
-			{
-				return this._user.Entity;
-			}
-			set
-			{
-				user previousValue = this._user.Entity;
-				if (((previousValue != value) 
-							|| (this._user.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._user.Entity = null;
-						previousValue.submissions.Remove(this);
-					}
-					this._user.Entity = value;
-					if ((value != null))
-					{
-						value.submissions.Add(this);
-						this._editor_id = value.user_id;
-					}
-					else
-					{
-						this._editor_id = default(int);
-					}
-					this.SendPropertyChanged("user");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="work_submission", Storage="_work", ThisKey="work_id", OtherKey="work_id", IsForeignKey=true)]
 		public work work
 		{
@@ -1759,6 +1429,40 @@ namespace Tiresias.DAL
 						this._work_id = default(int);
 					}
 					this.SendPropertyChanged("work");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_submission", Storage="_user", ThisKey="editor_id", OtherKey="user_id", IsForeignKey=true)]
+		public user user
+		{
+			get
+			{
+				return this._user.Entity;
+			}
+			set
+			{
+				user previousValue = this._user.Entity;
+				if (((previousValue != value) 
+							|| (this._user.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._user.Entity = null;
+						previousValue.submissions.Remove(this);
+					}
+					this._user.Entity = value;
+					if ((value != null))
+					{
+						value.submissions.Add(this);
+						this._editor_id = value.user_id;
+					}
+					else
+					{
+						this._editor_id = default(int);
+					}
+					this.SendPropertyChanged("user");
 				}
 			}
 		}
@@ -2227,6 +1931,326 @@ namespace Tiresias.DAL
 		{
 			this.SendPropertyChanging();
 			entity.work = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.users")]
+	public partial class user : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _user_id;
+		
+		private string _email;
+		
+		private string _password;
+		
+		private int _organization_id;
+		
+		private int _role_id;
+		
+		private System.Nullable<bool> _active;
+		
+		private EntitySet<submission> _submissions;
+		
+		private EntitySet<work> _works;
+		
+		private EntityRef<organization> _organization;
+		
+		private EntityRef<role> _role;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onuser_idChanging(int value);
+    partial void Onuser_idChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
+    partial void Onorganization_idChanging(int value);
+    partial void Onorganization_idChanged();
+    partial void Onrole_idChanging(int value);
+    partial void Onrole_idChanged();
+    partial void OnactiveChanging(System.Nullable<bool> value);
+    partial void OnactiveChanged();
+    #endregion
+		
+		public user()
+		{
+			this._submissions = new EntitySet<submission>(new Action<submission>(this.attach_submissions), new Action<submission>(this.detach_submissions));
+			this._works = new EntitySet<work>(new Action<work>(this.attach_works), new Action<work>(this.detach_works));
+			this._organization = default(EntityRef<organization>);
+			this._role = default(EntityRef<role>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int user_id
+		{
+			get
+			{
+				return this._user_id;
+			}
+			set
+			{
+				if ((this._user_id != value))
+				{
+					this.Onuser_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_id = value;
+					this.SendPropertyChanged("user_id");
+					this.Onuser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this.OnpasswordChanging(value);
+					this.SendPropertyChanging();
+					this._password = value;
+					this.SendPropertyChanged("password");
+					this.OnpasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_organization_id", DbType="Int NOT NULL")]
+		public int organization_id
+		{
+			get
+			{
+				return this._organization_id;
+			}
+			set
+			{
+				if ((this._organization_id != value))
+				{
+					if (this._organization.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onorganization_idChanging(value);
+					this.SendPropertyChanging();
+					this._organization_id = value;
+					this.SendPropertyChanged("organization_id");
+					this.Onorganization_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_id", DbType="Int NOT NULL")]
+		public int role_id
+		{
+			get
+			{
+				return this._role_id;
+			}
+			set
+			{
+				if ((this._role_id != value))
+				{
+					if (this._role.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onrole_idChanging(value);
+					this.SendPropertyChanging();
+					this._role_id = value;
+					this.SendPropertyChanged("role_id");
+					this.Onrole_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit")]
+		public System.Nullable<bool> active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this.OnactiveChanging(value);
+					this.SendPropertyChanging();
+					this._active = value;
+					this.SendPropertyChanged("active");
+					this.OnactiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_submission", Storage="_submissions", ThisKey="user_id", OtherKey="editor_id")]
+		public EntitySet<submission> submissions
+		{
+			get
+			{
+				return this._submissions;
+			}
+			set
+			{
+				this._submissions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_work", Storage="_works", ThisKey="user_id", OtherKey="user_entry_Id")]
+		public EntitySet<work> works
+		{
+			get
+			{
+				return this._works;
+			}
+			set
+			{
+				this._works.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="organization_user", Storage="_organization", ThisKey="organization_id", OtherKey="organization_id", IsForeignKey=true)]
+		public organization organization
+		{
+			get
+			{
+				return this._organization.Entity;
+			}
+			set
+			{
+				organization previousValue = this._organization.Entity;
+				if (((previousValue != value) 
+							|| (this._organization.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._organization.Entity = null;
+						previousValue.users.Remove(this);
+					}
+					this._organization.Entity = value;
+					if ((value != null))
+					{
+						value.users.Add(this);
+						this._organization_id = value.organization_id;
+					}
+					else
+					{
+						this._organization_id = default(int);
+					}
+					this.SendPropertyChanged("organization");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="role_user", Storage="_role", ThisKey="role_id", OtherKey="role_id", IsForeignKey=true)]
+		public role role
+		{
+			get
+			{
+				return this._role.Entity;
+			}
+			set
+			{
+				role previousValue = this._role.Entity;
+				if (((previousValue != value) 
+							|| (this._role.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._role.Entity = null;
+						previousValue.users.Remove(this);
+					}
+					this._role.Entity = value;
+					if ((value != null))
+					{
+						value.users.Add(this);
+						this._role_id = value.role_id;
+					}
+					else
+					{
+						this._role_id = default(int);
+					}
+					this.SendPropertyChanged("role");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_submissions(submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = this;
+		}
+		
+		private void detach_submissions(submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = null;
+		}
+		
+		private void attach_works(work entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = this;
+		}
+		
+		private void detach_works(work entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = null;
 		}
 	}
 }

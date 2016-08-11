@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Tiresias.Models.User>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateUser")
 </p>
 <table class="table">
     <tr>
@@ -34,9 +34,8 @@
             @Html.DisplayFor(modelItem => item.OrgName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }, new { Href = "#" }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }, new { Href = "#" })
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { Href = "#" })
+            @Html.ActionLink("Edit", "EditUser", new { id=item.user_id}) |            
+            @Html.ActionLink("Delete", "DeleteUser", new { id = item.user_id })
         </td>
     </tr>
 }

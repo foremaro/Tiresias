@@ -57,19 +57,6 @@
       <Association Name="organization_translator" Member="organization" ThisKey="organization_id" OtherKey="organization_id" Type="organization" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.users" Member="users">
-    <Type Name="user">
-      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="organization_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="role_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="user_submission" Member="submissions" ThisKey="user_id" OtherKey="editor_id" Type="submission" />
-      <Association Name="user_work" Member="works" ThisKey="user_id" OtherKey="user_entry_Id" Type="work" />
-      <Association Name="organization_user" Member="organization" ThisKey="organization_id" OtherKey="organization_id" Type="organization" IsForeignKey="true" />
-      <Association Name="role_user" Member="role" ThisKey="role_id" OtherKey="role_id" Type="role" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.submissions" Member="submissions">
     <Type Name="submission">
       <Column Name="submission_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -80,8 +67,8 @@
       <Column Name="editor_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="approved" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="user_submission" Member="user" ThisKey="editor_id" OtherKey="user_id" Type="user" IsForeignKey="true" />
       <Association Name="work_submission" Member="work" ThisKey="work_id" OtherKey="work_id" Type="work" IsForeignKey="true" />
+      <Association Name="user_submission" Member="user" ThisKey="editor_id" OtherKey="user_id" Type="user" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.works" Member="works">
@@ -100,6 +87,20 @@
       <Association Name="language_work" Member="language" ThisKey="language_id" OtherKey="language_id" Type="language" IsForeignKey="true" />
       <Association Name="translator_work" Member="translator" ThisKey="translator_id" OtherKey="translator_id" Type="translator" IsForeignKey="true" />
       <Association Name="user_work" Member="user" ThisKey="user_entry_Id" OtherKey="user_id" Type="user" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.users" Member="users">
+    <Type Name="user">
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="organization_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="role_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="user_submission" Member="submissions" ThisKey="user_id" OtherKey="editor_id" Type="submission" />
+      <Association Name="user_work" Member="works" ThisKey="user_id" OtherKey="user_entry_Id" Type="work" />
+      <Association Name="organization_user" Member="organization" ThisKey="organization_id" OtherKey="organization_id" Type="organization" IsForeignKey="true" />
+      <Association Name="role_user" Member="role" ThisKey="role_id" OtherKey="role_id" Type="role" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
