@@ -8,7 +8,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tiresias.Models
 {
-    [Table("authors")]
     public class Author
     {
         [Key]

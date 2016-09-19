@@ -25,6 +25,11 @@ namespace Tiresias.Models
         {
         }
 
+        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

@@ -76,17 +76,17 @@ namespace Tiresias.Controllers
                 return View(model);
             }
 
-            // new login logic
-            var user = dbContext.users
-                       .Where(u=> u.email == model.Email && u.password ==model.Password)
-                       .Select (p => new User 
-                       {
-                           email = p.email,
-                           password = p.password,
-                           organization_id = p.organization_id,
-                           role_id = p.role_id,
-                           user_id = p.user_id
-                       }).SingleOrDefault();
+            //// new login logic
+            //var user = dbContext.users
+            //           .Where(u=> u.email == model.Email && u.password ==model.Password)
+            //           .Select (p => new User 
+            //           {
+            //               Email = p.email,
+            //               Password = p.password,
+            //               OrganizationId = p.organization_id,
+            //               RoleId = p.role_id,
+            //               UserId = p.user_id
+            //           }).FirstOrDefault();
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -162,34 +162,34 @@ namespace Tiresias.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(User model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                //var result = await UserManager.CreateAsync(user, model.Password);
-                //if (result.Succeeded)
-                //{
-                //    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
-                //    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                //    // Send an email with this link
-                //    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                //    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                //    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                //    return RedirectToAction("Index", "Home");
-                //}
-                //AddErrors(result);
-
-                var user = new User
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
                 {
-                    email = model.email,
-                    password = model.password,
-                    role_id = 4,    // set role to data entry initially, can be changed by admin 
-                    organization_id = model.organization_id,
-                    user_id = model.user_id
-                };
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+
+                //var user = new User
+                //{
+                //    Email = model.Email,
+                //    Password = model.Password,
+                //    RoleId = 4,    // set role to data entry initially, can be changed by admin 
+                //    OrganizationId = model.OrganizationId,
+                //    UserId = model.UserId
+                //};
 
 
 

@@ -102,13 +102,14 @@ namespace Tiresias.Controllers
         [HttpPost]
         public ActionResult CreateUser(User newUser)
         {
+           
             try
             {
                 user dalSubmission = new user
                 {
-                    email = newUser.email,
-                    password = newUser.password,
-                    role_id = newUser.role_id
+                    email = newUser.Email,
+                    password = newUser.Password,
+                    role_id = newUser.RoleId
                 };
 
                 if (!dbContext.organizations.Any(o => o.orginization_name.Contains(newUser.OrgName)
@@ -148,10 +149,10 @@ namespace Tiresias.Controllers
                               join r in dbContext.roles on u.role_id equals r.role_id
                               select new User
                               {
-                                  email = u.email,
+                                  Email = u.email,
                                   RoleName = r.role_name,
-                                  role_id = u.role_id,
-                                  organization_id = u.organization_id,
+                                  RoleId = u.role_id,
+                                  OrganizationId = u.organization_id,
                                   OrgName = o.orginization_name
                               }).FirstOrDefault();
 
@@ -165,10 +166,10 @@ namespace Tiresias.Controllers
             try
             {
                 user dalUser = (from u in dbContext.users
-                                where u.user_id == userToSave.user_id
+                                where u.user_id == userToSave.UserId
                                 select u).FirstOrDefault();
-                dalUser.email = userToSave.email;
-                dalUser.password = userToSave.password;
+                dalUser.email = userToSave.Email;
+                dalUser.password = userToSave.Password;
                 if (!dbContext.organizations.Any(o=>o.orginization_name.Contains(userToSave.OrgName)
                 || o.orginization_name.StartsWith(userToSave.OrgName)))
                 {
@@ -181,10 +182,10 @@ namespace Tiresias.Controllers
 
                     dbContext.organizations.InsertOnSubmit(newOrg);
                     dbContext.SubmitChanges();
-                    dalUser.organization_id = userToSave.organization_id;
+                    dalUser.organization_id = userToSave.OrganizationId;
                 }
                 
-                dalUser.role_id = userToSave.role_id;
+                dalUser.role_id = userToSave.RoleId;
                 dbContext.SubmitChanges();
 
                 return RedirectToAction("UserMGMT");
@@ -204,11 +205,11 @@ namespace Tiresias.Controllers
                         where u.user_id == id
                         select new User
                         {
-                            user_id = u.user_id,
-                            email = u.email,
+                            UserId = u.user_id,
+                            Email = u.email,
                             RoleName = r.role_name,
-                            role_id = u.role_id,
-                            organization_id = u.organization_id,
+                            RoleId = u.role_id,
+                            OrganizationId = u.organization_id,
                             OrgName = o.orginization_name
                         }).FirstOrDefault();
                 
@@ -270,21 +271,21 @@ namespace Tiresias.Controllers
                          where u.active == true
                          select new User
                          {
-                             email = u.email,
-                             organization_id = u.organization_id,
-                             password = u.password,
-                             role_id = u.role_id,
-                             user_id = u.user_id,
+                             Email = u.email,
+                             OrganizationId = u.organization_id,
+                             Password = u.password,
+                             RoleId = u.role_id,
+                             UserId = u.user_id,
                              RoleName = r.role_name,
                              OrgName = o.orginization_name
                          });
             byte[] data; 
             foreach (var u in users)
             {
-                data = System.Text.Encoding.ASCII.GetBytes(u.password);
+                data = System.Text.Encoding.ASCII.GetBytes(u.Password);
                 data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
                 String hash = System.Text.Encoding.ASCII.GetString(data);
-                u.password = hash;
+                u.Password = hash;
             }
             
 

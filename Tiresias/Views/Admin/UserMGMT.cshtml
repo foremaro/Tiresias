@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<Tiresias.Models.User>
 
 <p>
-    @Html.ActionLink("Create New", "CreateUser")
+    @Html.ActionLink("Create New", "Register", "Account")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.email)
+            @Html.DisplayNameFor(model => model.Email)
         </th>
 
 
@@ -23,7 +23,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.email)
+            @Html.DisplayFor(modelItem => item.Email)
         </td>
 
    
@@ -34,8 +34,8 @@
             @Html.DisplayFor(modelItem => item.OrgName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "EditUser", new { id=item.user_id}) |            
-            @Html.ActionLink("Delete", "DeleteUser", new { id = item.user_id })
+            @Html.ActionLink("Edit", "EditUser", new { id=item.UserId}) |            
+            @Html.ActionLink("Delete", "DeleteUser", new { id = item.UserId })
         </td>
     </tr>
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Web.Configuration;
+using System.Web.Hosting;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -58,11 +60,11 @@ namespace Tiresias
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = WebConfigurationManager.AppSettings["GoogleAuthId"],
+                ClientSecret = WebConfigurationManager.AppSettings["GoogleAuthSecret"]
+            });
         }
     }
 }

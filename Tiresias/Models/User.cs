@@ -14,28 +14,36 @@ namespace Tiresias.Models
     {
         [Required]
         [Key]
-        public int user_id { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         [EmailAddress]
         [Display(Name ="Email")]
-        public string email { get; set; }
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [StringLength(12, MinimumLength =6)]
         [Display(Name ="Password: ")]
-        public string password { get; set; }
+        public string Password { get; set; }
 
-        public int organization_id { get; set; }
+        [Required]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Please confirm your password.")]
+        public string ConfirmPassword { get; set; }
+
+        
+        public int OrganizationId { get; set; }
+
         [Display(Name = "Role")]
-        public int role_id { get; set; }
+        public int RoleId { get; set; }
         
         public string RoleName { get; set; }
+
         [Display(Name ="Organization")]
         public string OrgName { get; set; }
 
-        public bool active { get; set; }
+        public bool Active { get; set; }
 
         //public string Id
         //{

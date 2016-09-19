@@ -6,11 +6,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.email)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.email)
+            @Html.DisplayFor(model => model.Email)
         </dd>
        
         <dt>
@@ -31,7 +31,7 @@
 
     </dl>
 
-    @using (Html.BeginForm("DeleteUserConfirmed", "Admin", new { id = Model.user_id }, FormMethod.Post)) {
+    @using (Html.BeginForm("DeleteUserConfirmed", "Admin", new { id = Model.UserId }, FormMethod.Post)) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
