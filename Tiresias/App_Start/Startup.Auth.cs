@@ -63,7 +63,8 @@ namespace Tiresias
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = WebConfigurationManager.AppSettings["GoogleAuthId"],
-                ClientSecret = WebConfigurationManager.AppSettings["GoogleAuthSecret"]
+                ClientSecret = WebConfigurationManager.AppSettings["GoogleAuthSecret"],
+                CallbackPath = new PathString("/signin-google")
             });
         }
     }
